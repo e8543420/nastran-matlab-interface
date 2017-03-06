@@ -1,0 +1,6 @@
+调用范例
+[output_resp,new_match]=analysis_nas([3.555E+7,3.055E+7,8.4E+7],1,'modal-1.bdf')
+
+文件说明：
+parm.dat  --参数文档，表头：参数名，类型，编号，初始值，是否参与，上限，下限，行号，起始列
+./data/Nas_path.cfg   --Nastran目录位置配置文件
