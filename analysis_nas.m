@@ -1,11 +1,11 @@
-%±¾³ÌĞòÓÃÓÚµ÷ÓÃnastran½øĞĞ¼ÆËã²¢Êä³öÌØ¶¨½á¹û
+%æœ¬ç¨‹åºç”¨äºè°ƒç”¨nastranè¿›è¡Œè®¡ç®—å¹¶è¾“å‡ºç‰¹å®šç»“æœ
 function [output_resp,new_match]=analysis_nas(parm_input,output_type,name_bdf,name_unv,ref_vec,vec_match,auto_match)
 % clear;
-% output_type=1; %Êä³ö½á¹ûÀàĞÍ£¬1£¬Ä£Ì¬ 2, freq and modal vector
+% output_type=1; %è¾“å‡ºç»“æœç±»å‹ï¼Œ1ï¼Œæ¨¡æ€ 2, freq and modal vector
 % modal_order=[1,2,3,4];
 % parm_input=[1.04e11,9.2e9];
 % name_bdf='modal-90.bdf';
-%path_nastran='C:\MSC.Software\MSC_Nastran\20130\bin\nast20130.exe';  %nastranµ÷ÓÃÄ¿Â¼£¬»»»úÆ÷ĞèÒª¸Ä
+%path_nastran='C:\MSC.Software\Patran_x64\20122\bin\MscNastranExecute.exe';  %nastranè°ƒç”¨ç›®å½•ï¼ŒæŒ‰patranæ‰§è¡Œæ¥å£è°ƒç”¨ï¼Œæ¢æœºå™¨éœ€è¦æ”¹
 fid=fopen('./data/Nas_path.cfg','r');
 tline=fgetl(fid);
 path_nastran=tline;
@@ -14,7 +14,7 @@ fclose(fid);
 new_match=[];% initializtion for output
 output_resp=[];
 
-fid=fopen('./parm.dat','r'); %¶ÁÈ¡ĞŞÕı²ÎÊıĞÅÏ¢
+fid=fopen('./parm.dat','r'); %è¯»å–ä¿®æ­£å‚æ•°ä¿¡æ¯
 i=1;
 while ~feof(fid)
     tline=fgetl(fid);
@@ -42,7 +42,7 @@ fclose(fid);
 delete('./temp/*.*')
 copyfile(strcat('./',name_bdf),'./temp/anaysis_temp.bdf');
 
-for i=1:num_parm  %¸ÄĞ´bdf
+for i=1:num_parm  %æ”¹å†™bdf
     fid=fopen('./temp/anaysis_temp.bdf','r');
     for j=1:parm_line(i)
         tline=fgetl(fid);
@@ -58,7 +58,7 @@ for i=1:num_parm  %¸ÄĞ´bdf
     fclose(fid2);
 end
 
-oldPath=cd('.\temp'); %µ÷ÓÃNastran
+oldPath=cd('.\temp'); %è°ƒç”¨Nastran
 [~,~]=system(strcat(path_nastran,' -j anaysis_temp -d ddd.db -w'));
 cd(oldPath);
 
@@ -79,7 +79,7 @@ if output_type==1
         end
     end
     fclose(fid);
-    if i==1  %¼ì²éÊÇ·ñÓĞ½á¹û
+    if i==1  %æ£€æŸ¥æ˜¯å¦æœ‰ç»“æœ
         output_resp=zeros(1,20);
         return
     end
@@ -102,7 +102,7 @@ elseif output_type==2
         end
     end
     fclose(fid);
-    if i==1  %¼ì²éÊÇ·ñÓĞ½á¹û
+    if i==1  %æ£€æŸ¥æ˜¯å¦æœ‰ç»“æœ
         output_resp=zeros(1,20);
         return
     end
